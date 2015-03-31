@@ -1,0 +1,161 @@
+
+<a id="menu-toggle" href="#" class="btn btn-dark btn-lg toggle"><i class="fa fa-bars"></i></a>
+<nav id="sidebar-wrapper" class="active">
+    <ul class="sidebar-nav">
+        <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
+        <li class="sidebar-brand">
+            <a href="#top">Administração</a>
+        </li>
+        <li>
+            <a class="btn btn-dark">Notícias</a>
+        </li>
+        <li>
+            <a class="btn btn-dark" data-toggle="modal" data-target="#modal1">Meu Perfil</a>
+        </li>
+        <li>
+            <a id="btnSair" class="btn btn-dark" href="admin/sair">Sair</a>
+        </li>
+    </ul>
+</nav>
+
+<aside class="call-to-action bg-primary">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h3>Administração</h3>
+            </div>
+        </div>
+    </div>
+</aside>
+
+<!-- Painel de Noticias -->
+<div class="panel panel-default" style="width: 50%; margin: 50px auto;">
+    <div class="panel-heading">
+        <h4> Notícias </h4>
+    </div>
+    <div class="panel-body">
+        <table class="table"> 
+            <thead>
+                <tr>
+                    <th> URL </th>
+                    <th> USUÁRIO </th>
+                </tr>
+            </thead>
+            <tbody>
+            <!-- TODO: Trocar de usuario para noticia -->
+                <% u.noticia.forEach(function(us){ %>
+                <tr>
+                    <td> <%- us.url %> </td>
+                    <td> <%- us.nome_usuario %> </td>
+                </tr>
+                <%  }) %>
+            </tbody>
+        </table>
+        <a class="btn btn-info" data-toggle="modal" data-target="#modalAddNoticia"> Adicionar Notícia </a>
+    </div>
+</div>
+
+<!-- Painel de Usuarios -->
+<div class="panel panel-default" style="width: 50%; margin: 50px auto;">
+    <div class="panel-heading">
+        <h4> Usuários </h4>
+    </div>
+    <div class="panel-body">
+        <table class="table"> 
+            <thead>
+                <tr>
+                    <th> NOME </th>
+                    <th> E-MAIL </th>
+                    <th> SENHA </th>
+                </tr>
+            </thead>
+            <tbody>
+                <% u.user.forEach(function(us){ %>
+                <tr>
+                    <td> <%- us.nome %>  </td>
+                    <td> <%- us.email %> </td>
+                    <td> <%- us.senha %> </td>
+                </tr>
+                <%  }) %>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<div class="modal fade" id="modal1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <img src="img/perfil.jpg" alt="Seu nome" class="img-circle img-thumbnail" style="height:200px; margin-bottom:20px;">
+                <h4 class="modal-title" id="myModalLabel">Seu nome </h4>
+
+            </div>
+            <div class="modal-body">
+                Pequena descrição
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalAddNoticia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header text-center">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Adicionar Notícia</h4>
+            </div>
+            <div class="modal-body">
+                <form class="well form-inline" id="formAddNoticia" action="">
+                    <input type="text" id="addNoticiaUrl" placeholder="Url">
+
+                    <div class="btn-group"> <a class="btn btn-default dropdown-toggle btn-usuario" data-toggle="dropdown" href="#"> Usuário <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <% u.user.forEach(function(us){ %>
+                            <li>
+                                <a href="#"> <%- us.nome %> </a>
+                            </li>
+                            <%  }) %>
+                        </ul>
+                    </div>
+            <button type="submit" class="btn btn-primary">Adicionar</button>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+    </div>
+</div>
+</div>
+</div>
+
+
+
+<!-- Bootstrap Core CSS -->
+<link href="css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Custom CSS -->
+<link href="css/stylish-portfolio.css" rel="stylesheet">
+
+<!-- Custom Fonts -->
+<link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+<!-- jQuery -->
+<script src="js/jquery.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="js/theme.js"> </script>
+
+<script src="js/ajax_insert_noticia.js"> </script>
+
+<script>
+    $(".dropdown-menu li a").click(function(){
+        var selText = $(this).text();
+        $(this).parents('.btn-group').find('.dropdown-toggle').html(selText+' <span class="caret"></span>');
+    });
+</script>

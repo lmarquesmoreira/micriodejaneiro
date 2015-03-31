@@ -26,3 +26,12 @@
             }
         });
     });
+
+   /* 
+    -- para adicionar http://
+    $(function(){
+        $('#addNoticiaUrl').bind('click', function(e){
+            if($.trim($(e.target).val())==='') $(e.target).val('http://www.');
+        });
+    });
+    */
